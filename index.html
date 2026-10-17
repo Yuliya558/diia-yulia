@@ -1229,6 +1229,62 @@ button {
 }
 </style>
 
+
+<style>
+/* Нова картка «Закордонний паспорт» у вкладці «Документи» */
+#documents .foreign-passport-panel {
+  display:flex; align-items:center; justify-content:center;
+  min-height:calc(100dvh - 180px); padding:10px 0 18px;
+}
+#documents .foreign-passport-card {
+  width:100%; max-width:360px; min-height:460px; padding:23px 20px 20px;
+  border-radius:27px; overflow:hidden; color:#15151a;
+  background:rgba(255,255,255,.56);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 12px 35px rgba(44,87,94,.08);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+}
+#documents .foreign-passport-title {
+  font-size:25px; font-weight:600; line-height:1.12;
+  letter-spacing:-.4px; margin:0 0 18px;
+}
+#documents .foreign-passport-main {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:14px; align-items:start;
+}
+#documents .foreign-passport-photo {
+  width:100%; aspect-ratio:.78; border-radius:16px; overflow:hidden;
+  background:linear-gradient(145deg,#fff,#e8edf6);
+}
+#documents .foreign-passport-photo img {
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+#documents .foreign-passport-data {font-size:14px; line-height:1.4; overflow-wrap:anywhere}
+#documents .foreign-passport-data div {margin-bottom:13px}
+#documents .foreign-passport-data b {display:block;font-size:13px;font-weight:500;margin-bottom:4px}
+#documents .foreign-passport-data span {display:block}
+#documents .foreign-passport-sign {font-family:cursive;font-size:34px;transform:rotate(-9deg);margin-top:3px}
+#documents .foreign-passport-status {
+  margin:19px -20px 18px; padding:9px 20px; overflow:hidden; white-space:nowrap;
+  background:linear-gradient(90deg,#a9ef8d,#9cebc1 55%,#a4e8df);
+  color:#183c30;font-size:12px;line-height:1.4;
+}
+#documents .foreign-passport-foot {display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+#documents .foreign-passport-name {font-size:22px;font-weight:700;line-height:1.08;overflow-wrap:anywhere}
+#documents .foreign-passport-more {
+  flex-shrink:0; border:0; background:transparent; color:#171b22;
+  font-size:17px; padding:7px; border-radius:10px;
+}
+@media(max-width:380px) {
+  #documents .foreign-passport-card {padding:20px 16px}
+  #documents .foreign-passport-status {margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+  #documents .foreign-passport-name {font-size:20px}
+}
+
+
+
+</style>
+
 </head>
 
 <body>
@@ -1352,6 +1408,28 @@ button {
       <div class="header">
       <div class="page"><div class="documents-stage">
         <div class="doc-carousel" id="docCarousel" aria-label="Картки документів">
+
+            <div class="doc-panel" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+            <div class="passport-flip" id="passportFlip" tabindex="0" role="button" aria-label="Перевернути демонстраційну картку паспорта" aria-pressed="false" onclick="togglePassportFlip()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePassportFlip()}" >
+              <div class="passport-flip-inner">
+                <div class="passport-demo passport-face passport-front" >
+                  <div class="passport-title" style="font-size: 30px; line-height: 1.15;">Закордонний<br>паспорт</div>
+                  <div class="passport-main"><div class="passport-photo" aria-hidden="true"><img src="img/yulia.jpg" alt="" style="width: 200px; height: auto;"></div><div class="passport-data" style="font-weight: bold; font-size: 20px; "><b style="font-weight: bold;">Дата<br>народження:</b>21.03.2008<br><br><b style="font-weight: bold;">Номер:</b>PU702490<div class="passport-sign"><div class="foreign-passport-sign" aria-hidden="true"><img src="img/sign.png" width="150px" height="auto"></div></div></div></div>
+                  <div class="passport-divider"></div><div class="passport-status"><span class="ticker" style="font-size: 15px; font-weight: bold;">• Документ оновлено о 14:25 | 10.05.2026 · Перевірено державною податковою служб · </span></div><div class="passport-foot"><div class="passport-name" style="font-size: 25px; line-height: 1.2; font-weight: bold;">БАБІЄНКО<br>ЮЛІЯ<br>ОЛЕКСІЇВНА</div><button type="button" class="foreign-passport-more" aria-label="Інформація про картку" onclick="event.stopPropagation();openModal('Закордонний паспорт','Це демонстраційна картка інтерфейсу. Номер і дані не є справжніми.')">▤ 2</button></div>
+                </div>
+                <div class="passport-back code-face" aria-hidden="true">
+                  <h3>QR-код документа</h3>
+                  <div class="demo-qr"><img src="img/qr2.jpg" alt="" style="width: 300px; height: auto;"></div>
+                  <div class="barcode-graphic"><img src="img/shrift.png" alt="" style="width: 400px; height: auto;"></div>
+                  <div class="code-switcher">
+                    <button type="button" class="code-choice active" onclick="event.stopPropagation();switchCodeType(this,'qr')"><span class="code-choice-icon"><img src="img/qr3.png" alt="" style="width: 50px; height: auto;"></span><span>QR-код</span></button>
+                    <button type="button" class="code-choice" onclick="event.stopPropagation();switchCodeType(this,'barcode')"><span class="code-choice-icon">|||</span><span>Штрихкод</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div class="doc-panel" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
             <div class="passport-flip" id="passportFlip" tabindex="0" role="button" aria-label="Перевернути демонстраційну картку паспорта" aria-pressed="false" onclick="togglePassportFlip()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePassportFlip()}" >
               <div class="passport-flip-inner">
@@ -1399,7 +1477,7 @@ button {
           </div>
         </div>
         
-        <div class="doc-dots"><button class="active" aria-label="Паспорт" onclick="showDoc(0)"></button><button aria-label="Картка платника податків" onclick="showDoc(1)"></button><button aria-label="Додати документ і змінити порядок" onclick="showDoc(2)"></button></div>
+        <div class="doc-dots"><button class="active" aria-label="єДокумент" onclick="showDoc(0)"></button><button aria-label="Закордонний паспорт" onclick="showDoc(1)"></button><button aria-label="Картка платника податків" onclick="showDoc(2)"></button><button aria-label="Додати документ і змінити порядок" onclick="showDoc(3)"></button></div>
       </div></div>
     </section>
 
@@ -1580,11 +1658,8 @@ function changeTab(tab, button) {
 }
 
 
-document.getElementById('documents')
-    .classList.toggle(
-        'documents-actions-theme',
-        index === 2
-    );
+// Фон документів перемикається разом із розділом; помилкового index тут немає.
+document.getElementById('documents').classList.add('documents-actions-theme');
 
 
 function switchCodeType(button, type) {
@@ -1625,7 +1700,7 @@ function showDoc(index) {
     if (!panels[index]) return;
     panels[index].scrollIntoView({behavior: "smooth", block: "nearest", inline: "start"});
     dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-    document.getElementById("docUpdate").textContent = ["Дані оновлено · демонстраційний режим","Картку платника податків відкрито · демо","Дії з документами · демо"][index] || "Демонстраційний режим";
+    document.getElementById("docUpdate").textContent = ["Дані оновлено · демонстраційний режим","Закордонний паспорт · демонстраційний макет","Картку платника податків відкрито · демо","Дії з документами · демо"][index] || "Демонстраційний режим";
     dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
 }
 function copyDemoNumber() {
@@ -1776,3 +1851,13 @@ if (newsCarousel) newsCarousel.addEventListener('scroll', () => {
 
 </body>
 </html>
+
+<style>
+/* Немного увеличенная карточка документа */
+#documents .page { padding-left: 10px !important; padding-right: 10px !important; }
+#documents .passport-flip,
+#documents .tax-flip {
+    height: clamp(500px, calc(100dvh - 165px), 700px) !important;
+    max-height: calc(100dvh - 135px) !important;
+}
+</style>
